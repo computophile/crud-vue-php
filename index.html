@@ -75,12 +75,12 @@
           <div class="modal-body p-4">
             <form action="#" method="POST">
               <div class="form-group">
-                <input type="text" name="name" id="" class="form-control form-control-lg mt-3" placeholder="Name">
-                <input type="text" name="Email" id="" class="form-control form-control-lg mt-3" placeholder="Email">
-                <input type="text" name="Phone" id="" class="form-control form-control-lg mt-3" placeholder="Phone">
+                <input type="text" name="name" id="" class="form-control form-control-lg mt-3" placeholder="Name" v-model="newUser.name">
+                <input type="text" name="Email" id="" class="form-control form-control-lg mt-3" placeholder="Emai" v-model="newUser.email">
+                <input type="text" name="Phone" id="" class="form-control form-control-lg mt-3" placeholder="Phone" v-model="newUser.phone">
               </div>
               <div class="form-group">
-                <button class="btn btn-info btn-block btn-lg">Add User</button>
+                <button class="btn btn-info btn-block btn-lg" @click=" showAddModal=false; addUser()">Add User</button>
               </div>
             </form>
           </div>

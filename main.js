@@ -28,6 +28,42 @@ var app = new Vue({
         }
       )
     },
-
+    addUser(){
+        var formData = app.toFormData(app.newUser);
+        axios.post("http://localhost/crud-vue-php/process.php?action=create", formData).
+        then(function(response){
+          //reinitializing the data
+          newUser = {name: "", email: "", phone: ""};
+          if (response.data.error){
+            app.errorMsg = response.data.message;
+          }
+          else{
+            app.successMsg = response.data.message;
+            app.getAllUsers();
+          }
+        })
+    },
+    updateUser(){
+      var formData = app.toFormData(app.newUser);
+      axios.post("http://localhost/crud-vue-php/process.php?action=update", formData).
+      then(function(response){
+        app.currentUser = {};
+        if (response.data.error){
+          app.errorMsg = response.data.message;
+        }
+        else{
+          app.successMsg = response.data.message;
+          app.getAllUsers();
+        }
+      })
+  },
+    toFormData(obj){
+      var fd = new FormData();
+      for (var i in obj){
+        console.log("Value for Console Data: ", i);
+        fd.append(i, obj[i]);
+      }
+      return fd;
+    }
   },
 })
