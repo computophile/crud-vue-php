@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>CRUD Application</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- root element -->
+    <div class="container-fluid">
+      <div class="row bg-dark">
+        <div class="col-lg-12"></div>
+        <p class="text-light display-4 pt-3 mx-auto" style="font-size: 22px;">CRUD APPLICATION</p>
+      </div>
+    </div>
+    <div class="container pt-5">
+      <div class="row mt-3">
+        <div class="col-lg-6">
+          <h3 class="text-info">Registered Users</h3>
+        </div>
+        <div class="col-lg-6">
+          <button class="btn btn-info float-right" @click="showAddModal=true"><i class="fa fa-user"></i>&nbsp;&nbsp;Add New
+            User</button></div>
+      </div>
+      <!-- alert boxes -->
+      <hr class="bg-info">
+      <div class="alert alert-danger" v-if="errorMsg">Error Message!</div>
+      <div class="alert alert-success" v-if="successMsg">Success Message!</div>
+    </div>
+
+    <!--Displaying Records  -->
+    <div class="row p-5 m-auto" style="width: 80%">
+      <div class="col-lg-12">
+        <table class="table table-bordered table-striped">
+          <thead>
+            <tr class="text-center bg-info text-light">
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <tr class="text-center">
+              <td>1</td>
+              <td>Thisistaseen</td>
+              <td>thisistaseen@protonmail.com</td>
+              <td>234564322</td>
+              <td><a href="#" class="text-success" @click="showEditModal=true"><i class="fa fa-edit"></i></a></td>
+              <td><a href="#" class="text-danger" @click="showDeleteModal=true"><i class="fa fa-trash"></i></i></a></td>
+            </tr>
+
+            <tr class="text-center">
+              <td>1</td>
+              <td>Thisistaseen</td>
+              <td>thisistaseen@protonmail.com</td>
+              <td>234564322</td>
+              <td><a href="#" class="text-success" @click="showEditModal=true"><i class="fa fa-edit"></i></a></td>
+              <td><a href="#" class="text-danger" @click="showDeleteModal=true"><i class="fa fa-trash"></i></i></a></td>
+            </tr>
+
+            <tr class="text-center">
+              <td>1</td>
+              <td>Thisistaseen</td>
+              <td>thisistaseen@protonmail.com</td>
+              <td>234564322</td>
+              <td><a href="#" class="text-success" @click="showEditModal=true"><i class="fa fa-edit"></i></a></td>
+              <td><a href="#" class="text-danger" @click="showDeleteModal=true"><i class="fa fa-trash"></i></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- add new user modal -->
+    <div id="overlay" v-if="showAddModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="modal-title">Add New User</div>
+            <button class="close" type="button"  @click="showAddModal=false">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body p-4">
+            <form action="#" method="POST">
+              <div class="form-group">
+                <input type="text" name="name" id="" class="form-control form-control-lg mt-3" placeholder="Name">
+                <input type="text" name="Email" id="" class="form-control form-control-lg mt-3" placeholder="Email">
+                <input type="text" name="Phone" id="" class="form-control form-control-lg mt-3" placeholder="Phone">
+              </div>
+              <div class="form-group">
+                <button class="btn btn-info btn-block btn-lg">Add User</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- update user modal -->
+        <div id="overlay" v-if="showEditModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="modal-title">Edit User</div>
+                <button class="close" type="button"  @click="showEditModal=false">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body p-4">
+                <form action="#" method="POST">
+                  <div class="form-group">
+                    <input type="text" name="name" id="" class="form-control form-control-lg mt-3" placeholder="Name">
+                    <input type="text" name="Email" id="" class="form-control form-control-lg mt-3" placeholder="Email">
+                    <input type="text" name="Phone" id="" class="form-control form-control-lg mt-3" placeholder="Phone">
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-info btn-block btn-lg">Edit User</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- delete user moddal -->
+        <div id="overlay" v-if="showDeleteModal">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <div class="modal-title" >Delete User</div>
+                <button class="close" type="button"  @click="showEditModal=false">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body p-4">
+                <h4 class="text-danger">Are you sure you want to delete this user?</h4>
+                <h5>You are deleting username;!</h5>
+                <hr>
+                <button class="btn btn-danger btn-lg mr-4" @click="showDeleteModal=false">Yes</button>
+
+                <button class="btn btn-success btn-lg" @click="showDeleteModal=false">Cancel</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+  </div>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
