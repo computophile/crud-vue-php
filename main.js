@@ -44,7 +44,7 @@ var app = new Vue({
         })
     },
     updateUser(){
-      var formData = app.toFormData(app.newUser);
+      var formData = app.toFormData(app.currentUser);
       axios.post("http://localhost/crud-vue-php/process.php?action=update", formData).
       then(function(response){
         app.currentUser = {};
@@ -57,6 +57,22 @@ var app = new Vue({
         }
       })
   },
+
+  deleteUser(){
+    var formData = app.toFormData(app.currentUser);
+    axios.post("http://localhost/crud-vue-php/process.php?action=delete", formData).
+    then(function(response){
+      app.currentUser = {};
+      if (response.data.error){
+        app.errorMsg = response.data.message;
+      }
+      else{
+        app.successMsg = response.data.message;
+        app.getAllUsers();
+      }
+    })
+},
+
     toFormData(obj){
       var fd = new FormData();
       for (var i in obj){
@@ -64,6 +80,14 @@ var app = new Vue({
         fd.append(i, obj[i]);
       }
       return fd;
+    },
+    selectUser(user){
+      app.currentUser = user;
+    },
+    clearMsg(){
+      app.errorMsg = "";
+      app.successMsg = "";
     }
   },
+
 })
